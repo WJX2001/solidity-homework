@@ -1,15 +1,16 @@
 pragma solidity 0.8.7;
 
-
 interface ITest {
     function val() external view returns (uint256);
     function test() external;
 }
 
+
 contract Callback {
-    uint256 public val;
+    uint256 public val; 
 
     fallback() external {
+        // 接口中传入参数 实际传入一个合约地址，通过传入的合约地址调用函数
         val = ITest(msg.sender).val();
     }
 
@@ -17,6 +18,7 @@ contract Callback {
         ITest(target).test();
     }
 }
+
 
 contract TestStorage {
     uint256 public val;
